@@ -869,6 +869,7 @@ def capture_stdio(logger, **kwargs):
 
     # collect stdio file desc not in use for logging
     stdio_files = [sys.stdin, sys.stdout, sys.stderr]
+    stdio_files = []
     console_fds = [h.stream.fileno() for _junk, h in getattr(
         get_logger, 'console_handler4logger', {}).items()]
     stdio_files = [f for f in stdio_files if f.fileno() not in console_fds]

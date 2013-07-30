@@ -16,6 +16,7 @@
 """ Object Server for Swift """
 
 from __future__ import with_statement
+import pdb
 import cPickle as pickle
 import errno
 import os
@@ -659,6 +660,7 @@ class ObjectController(object):
     @timing_stats()
     def PUT(self, request):
         """Handle HTTP PUT requests for the Swift Object Server."""
+        #pdb.set_trace()
         start_time = time.time()
         key_id = request.headers.get('x-object-meta-key-id')
         try:
@@ -705,6 +707,7 @@ class ObjectController(object):
                 start_time = time.time()
                 etag_orig.update(chunk)
                 upload_size += len(chunk)
+                pdb.set_trace()
                 chunk = self.crypto_driver.encrypt(encryption_context, chunk)
                 if time.time() > upload_expiration:
                     self.logger.increment('PUT.timeouts')
